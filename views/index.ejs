@@ -1,0 +1,91 @@
+<%- include('partials/head') %>
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <h1>Matematik, sakin bir kafayla daha kolay.</h1>
+      <p class="lead">Psikoloji eğitimi almış bir matematik öğretmeniyle birebir özel ders. Önce öğrencinin nerede ve neden takıldığına bakılır, sonra konuya geçilir.</p>
+      <div class="actions">
+        <a class="btn" href="/randevu">Görüşme talebi oluştur</a>
+        <a class="btn btn-ghost" href="/hakkimda">Yaklaşımı oku</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <svg viewBox="0 0 480 400" role="img" aria-label="Karışık bir çizginin sadeleşip düzgün bir eğriye dönüşmesi">
+        <g fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".85">
+          <path d="M60 40V320H450"/>
+          <path d="M60 180H450" stroke-dasharray="2 9"/>
+          <path d="M150 314v12M240 314v12M330 314v12M420 314v12"/>
+        </g>
+        <path class="draw" pathLength="1" fill="none" stroke="#9A93D1" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"
+          d="M74 250C70 150 150 120 140 190C132 250 62 232 100 162C135 100 215 140 192 215C178 262 122 250 152 200C176 160 214 172 226 205"/>
+        <path class="draw second" pathLength="1" fill="none" stroke="#3E6A5C" stroke-width="5" stroke-linecap="round"
+          d="M226 205C250 125 288 125 316 205S378 285 408 205S436 140 452 160"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt">
+  <div class="wrap split">
+    <div>
+      <h2>Önce anlamak, sonra çözmek</h2>
+      <p>Matematikte takılmanın arkasında çoğu zaman bilgi eksikliğinden çok, kaygı ve kaçınma vardır. Dersler bu ikisini birlikte ele alır.</p>
+    </div>
+    <div class="points">
+      <div class="point"><h3>Takılma noktasını bulmak</h3><p>Yanlış cevap bir eksiklik değil, bir ipucudur. Hatalar birlikte incelenir ve eksik halka bulunur.</p></div>
+      <div class="point"><h3>Küçük ve ulaşılabilir adımlar</h3><p>Konular, öğrencinin yapabildiği yerden başlayıp parça parça ilerler. Her derste biten bir şey olur.</p></div>
+      <div class="point"><h3>Sakin bir ders ortamı</h3><p>Sınav ve matematik kaygısı yaşayan öğrenciler için acele edilmez, soru sormak ve yanılmak rahattır.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <h2>Nasıl ilerliyoruz?</h2>
+    <ol class="steps">
+      <li><h3>Görüşme talebi</h3><p>Formu doldurursunuz, size dönüş yapılır.</p></li>
+      <li><h3>Tanışma</h3><p>Öğrenci, aile ve ihtiyaçlar konuşulur.</p></li>
+      <li><h3>Çalışma planı</h3><p>Hedefe ve takvime göre bir plan çıkarılır.</p></li>
+      <li><h3>Dersler ve takip</h3><p>Düzenli derslerle ilerleme birlikte izlenir.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec alt" id="hizmetler">
+  <div class="wrap">
+    <h2>Hizmetler</h2>
+    <p>Dersler öğrencinin seviyesine ve hedefine göre şekillenir.</p>
+    <% if (!services.length) { %><p>Hizmet bilgileri yakında eklenecek.</p><% } %>
+    <div class="svc-list">
+      <% services.forEach(function (s) { %>
+        <article class="svc">
+          <h3><%= s.title %></h3>
+          <div><p><%= s.description %></p><% if (s.price_note) { %><span class="price"><%= s.price_note %></span><% } %></div>
+        </article>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <h2>Yazılar</h2>
+    <% if (!posts.length) { %><p>Henüz yazı eklenmedi.</p><% } %>
+    <ul class="posts">
+      <% posts.forEach(function (p) { %>
+        <li><span class="date"><%= fmt(p.created_at) %></span><h3><a href="/yazilar/<%= p.id %>"><%= p.title %></a></h3><p><%= p.summary %></p></li>
+      <% }) %>
+    </ul>
+    <p><a href="/yazilar">Tüm yazılar</a></p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="cta">
+      <div><h2>Bir ilk görüşmeyle başlayalım.</h2><p>Formu doldurun, en kısa sürede size dönüş yapılsın.</p></div>
+      <a class="btn" href="/randevu">Görüşme talebi oluştur</a>
+    </div>
+  </div>
+</section>
+<%- include('partials/foot') %>

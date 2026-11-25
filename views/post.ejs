@@ -1,0 +1,10 @@
+<%- include('partials/head') %>
+<article class="page">
+  <div class="wrap"><div class="narrow prose">
+    <p class="date"><a href="/yazilar">Yazılar</a> / <%= fmt(post.created_at) %></p>
+    <h1><%= post.title %></h1>
+    <% post.body.split(/\n+/).forEach(function (para) { %><p><%= para %></p><% }) %>
+    <div class="actions"><a class="btn" href="/randevu">Görüşme talebi oluştur</a></div>
+  </div></div>
+</article>
+<%- include('partials/foot') %>

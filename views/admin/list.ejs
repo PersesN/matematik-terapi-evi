@@ -1,0 +1,32 @@
+<%- include('../partials/head') %>
+<section class="page">
+  <div class="wrap">
+    <h1><%= r.plural %></h1>
+    <%- include('_nav') %>
+    <p><a class="btn btn-sm" href="/admin/<%= key %>/yeni"><%= r.label %> ekle</a></p>
+    <% if (!rows.length) { %>
+      <p>Henüz kayıt yok. İlk <%= r.label.toLocaleLowerCase('tr') %> kaydını ekleyin.</p>
+    <% } else { %>
+      <div class="scroll">
+        <table>
+          <thead><tr><% r.heads.forEach(function (h) { %><th><%= h %></th><% }) %><th><span class="sr">İşlem</span></th></tr></thead>
+          <tbody>
+          <% rows.forEach(function (row) { %>
+            <tr>
+              <% r.cols.forEach(function (c) { %><td class="msg"><%= row[c] %></td><% }) %>
+              <td class="row-actions">
+                <a class="btn btn-sm btn-ghost" href="/admin/<%= key %>/<%= row.id %>/duzenle">Düzenle</a>
+                <form method="post" action="/admin/<%= key %>/<%= row.id %>/sil" onsubmit="return confirm('Bu kayıt silinsin mi?')">
+                  <input type="hidden" name="_csrf" value="<%= csrf %>">
+                  <button class="btn btn-sm btn-danger" type="submit">Sil</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </div>
+</section>
+<%- include('../partials/foot') %>

@@ -1,0 +1,57 @@
+<%- include('partials/head') %>
+<section class="page">
+  <div class="wrap"><div class="narrow">
+    <h1>Görüşme talebi</h1>
+    <p>Formu doldurun, size en kısa sürede dönüş yapılsın. Yıldızlı alanlar zorunludur.</p>
+    <form class="form" method="post" action="/randevu">
+      <input type="hidden" name="_csrf" value="<%= csrf %>">
+      <div class="hp" aria-hidden="true"><label>Web sitesi <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+      <div class="field<%= e.name ? ' bad' : '' %>">
+        <label for="name">Ad soyad *</label>
+        <input id="name" name="name" type="text" maxlength="80" required autocomplete="name" value="<%= v.name || '' %>">
+        <% if (e.name) { %><p class="err"><%= e.name %></p><% } %>
+      </div>
+      <div class="two">
+        <div class="field<%= e.phone ? ' bad' : '' %>">
+          <label for="phone">Telefon *</label>
+          <input id="phone" name="phone" type="tel" maxlength="30" required autocomplete="tel" placeholder="05XX XXX XX XX" value="<%= v.phone || '' %>">
+          <% if (e.phone) { %><p class="err"><%= e.phone %></p><% } %>
+        </div>
+        <div class="field<%= e.email ? ' bad' : '' %>">
+          <label for="email">E-posta <span class="hint">(isteğe bağlı)</span></label>
+          <input id="email" name="email" type="email" maxlength="120" autocomplete="email" value="<%= v.email || '' %>">
+          <% if (e.email) { %><p class="err"><%= e.email %></p><% } %>
+        </div>
+      </div>
+      <div class="two">
+        <div class="field<%= e.grade ? ' bad' : '' %>">
+          <label for="grade">Öğrencinin seviyesi *</label>
+          <select id="grade" name="grade" required>
+            <option value="">Seçin</option>
+            <% GRADES.forEach(function (g) { %><option<%= v.grade === g ? ' selected' : '' %>><%= g %></option><% }) %>
+          </select>
+          <% if (e.grade) { %><p class="err"><%= e.grade %></p><% } %>
+        </div>
+        <div class="field<%= e.mode ? ' bad' : '' %>">
+          <label for="mode">Ders şekli *</label>
+          <select id="mode" name="mode" required>
+            <option value="">Seçin</option>
+            <% MODES.forEach(function (m) { %><option<%= v.mode === m ? ' selected' : '' %>><%= m %></option><% }) %>
+          </select>
+          <% if (e.mode) { %><p class="err"><%= e.mode %></p><% } %>
+        </div>
+      </div>
+      <div class="field<%= e.message ? ' bad' : '' %>">
+        <label for="message">Bize biraz anlatın *</label>
+        <textarea id="message" name="message" minlength="10" maxlength="1000" required placeholder="Hangi konularda zorlanılıyor? Yaklaşan bir sınav var mı?"><%= v.message || '' %></textarea>
+        <% if (e.message) { %><p class="err"><%= e.message %></p><% } %>
+      </div>
+      <div class="field<%= e.kvkk ? ' bad' : '' %>">
+        <label class="check"><input type="checkbox" name="kvkk" required<%= v.kvkk ? ' checked' : '' %>><span>Verdiğim bilgilerin yalnızca görüşme talebime dönüş yapmak için kullanılmasını kabul ediyorum.</span></label>
+        <% if (e.kvkk) { %><p class="err"><%= e.kvkk %></p><% } %>
+      </div>
+      <button class="btn" type="submit">Talebi gönder</button>
+    </form>
+  </div></div>
+</section>
+<%- include('partials/foot') %>

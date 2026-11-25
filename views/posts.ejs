@@ -1,0 +1,13 @@
+<%- include('partials/head') %>
+<section class="page">
+  <div class="wrap"><div class="narrow">
+    <h1>Yazılar</h1>
+    <% if (!posts.length) { %><p>Henüz yazı eklenmedi.</p><% } %>
+    <ul class="posts">
+      <% posts.forEach(function (p) { %>
+        <li><span class="date"><%= fmt(p.created_at) %></span><h3><a href="/yazilar/<%= p.id %>"><%= p.title %></a></h3><p><%= p.summary %></p></li>
+      <% }) %>
+    </ul>
+  </div></div>
+</section>
+<%- include('partials/foot') %>

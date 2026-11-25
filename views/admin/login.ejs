@@ -1,0 +1,14 @@
+<%- include('../partials/head') %>
+<section class="page">
+  <div class="wrap"><div class="narrow">
+    <h1>Yönetici girişi</h1>
+    <form class="form" method="post" action="/admin/giris">
+      <input type="hidden" name="_csrf" value="<%= csrf %>">
+      <% if (error) { %><p class="err" role="alert"><%= error %></p><% } %>
+      <div class="field"><label for="email">E-posta</label><input id="email" name="email" type="email" required autocomplete="username"></div>
+      <div class="field"><label for="password">Şifre</label><input id="password" name="password" type="password" required autocomplete="current-password"></div>
+      <button class="btn" type="submit">Giriş yap</button>
+    </form>
+  </div></div>
+</section>
+<%- include('../partials/foot') %>

@@ -1,0 +1,23 @@
+<%- include('../partials/head') %>
+<section class="page">
+  <div class="wrap"><div class="narrow">
+    <h1><%= title %></h1>
+    <%- include('_nav') %>
+    <form class="form" method="post" action="/admin/<%= key %><%= id ? '/' + id : '' %>">
+      <input type="hidden" name="_csrf" value="<%= csrf %>">
+      <% r.fields.forEach(function (f) { %>
+        <div class="field<%= errors[f.name] ? ' bad' : '' %>">
+          <label for="<%= f.name %>"><%= f.label %></label>
+          <% if (f.type === 'textarea') { %>
+            <textarea id="<%= f.name %>" name="<%= f.name %>" maxlength="<%= f.max %>"<%= f.required ? ' required' : '' %>><%= values[f.name] || '' %></textarea>
+          <% } else { %>
+            <input id="<%= f.name %>" name="<%= f.name %>" type="text" maxlength="<%= f.max %>"<%= f.required ? ' required' : '' %> value="<%= values[f.name] || '' %>">
+          <% } %>
+          <% if (errors[f.name]) { %><p class="err"><%= errors[f.name] %></p><% } %>
+        </div>
+      <% }) %>
+      <div class="actions"><button class="btn" type="submit">Kaydet</button><a class="btn btn-ghost" href="/admin/<%= key %>">Vazgeç</a></div>
+    </form>
+  </div></div>
+</section>
+<%- include('../partials/foot') %>

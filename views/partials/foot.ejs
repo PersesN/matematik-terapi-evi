@@ -1,0 +1,26 @@
+</main>
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <div>
+      <strong><%= site.name %></strong>
+      <p>Birebir matematik özel dersi.</p>
+    </div>
+    <div>
+      <% if (site.phone) { %><p><a href="tel:<%= site.phone.replace(/\s/g, '') %>"><%= site.phone %></a></p><% } %>
+      <% if (site.email) { %><p><a href="mailto:<%= site.email %>"><%= site.email %></a></p><% } %>
+      <% if (site.city) { %><p><%= site.city %></p><% } %>
+      <p><a href="/randevu">Görüşme talebi oluştur</a></p>
+    </div>
+    <div class="small">
+      <% if (isAdmin) { %>
+        <form method="post" action="/admin/cikis"><input type="hidden" name="_csrf" value="<%= csrf %>"><button class="linklike" type="submit">Çıkış yap</button></form>
+      <% } else { %><a href="/admin/giris">Yönetici girişi</a><% } %>
+    </div>
+  </div>
+</footer>
+<script>
+  var b = document.querySelector('.menu-btn'), n = document.getElementById('nav');
+  b.addEventListener('click', function () { var o = n.classList.toggle('open'); b.setAttribute('aria-expanded', o); });
+</script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+<nav class="admin-nav" aria-label="Yönetim menüsü">
+  <a href="/admin"<%- path === '/admin' ? ' aria-current="page"' : '' %>>Görüşme talepleri</a>
+  <a href="/admin/hizmetler"<%- path.startsWith('/admin/hizmetler') ? ' aria-current="page"' : '' %>>Hizmetler</a>
+  <a href="/admin/yazilar"<%- path.startsWith('/admin/yazilar') ? ' aria-current="page"' : '' %>>Yazılar</a>
+</nav>

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><%= title %> | <%= site.name %></title>
+<meta name="description" content="Psikoloji eğitimi almış bir matematik öğretmeninden birebir özel ders. Görüşme talebi oluşturun.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='16' fill='%23A9CDBD'/><text x='16' y='22' font-size='18' text-anchor='middle' fill='%232B3A38'>π</text></svg>">
+</head>
+<body>
+<a class="skip" href="#icerik">İçeriğe geç</a>
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="/"><span class="mark" aria-hidden="true">π</span><span><%= site.name %></span></a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav">Menü</button>
+    <nav id="nav" aria-label="Ana menü">
+      <a href="/hakkimda"<%- path === '/hakkimda' ? ' aria-current="page"' : '' %>>Hakkımda</a>
+      <a href="/#hizmetler">Hizmetler</a>
+      <a href="/yazilar"<%- path.startsWith('/yazilar') ? ' aria-current="page"' : '' %>>Yazılar</a>
+      <% if (isAdmin) { %><a href="/admin"<%- path.startsWith('/admin') ? ' aria-current="page"' : '' %>>Yönetim</a><% } %>
+      <a class="btn btn-sm" href="/randevu">Görüşme talebi</a>
+    </nav>
+  </div>
+</header>
+<main id="icerik">
+<% if (flash) { %><div class="wrap"><p class="flash" role="status"><%= flash %></p></div><% } %>

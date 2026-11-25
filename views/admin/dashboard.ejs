@@ -1,0 +1,59 @@
+<%- include('../partials/head') %>
+<section class="page">
+  <div class="wrap">
+    <h1>Görüşme talepleri</h1>
+    <%- include('_nav') %>
+    <ul class="chips">
+      <li><strong><%= counts.toplam %></strong> toplam</li>
+      <li class="c-yeni"><strong><%= counts.yeni %></strong> yeni</li>
+      <li class="c-gorusuldu"><strong><%= counts.gorusuldu %></strong> görüşüldü</li>
+      <li class="c-tamamlandi"><strong><%= counts.tamamlandi %></strong> tamamlandı</li>
+    </ul>
+    <form class="filters" method="get" action="/admin">
+      <label>Durum
+        <select name="durum">
+          <option value="">Hepsi</option>
+          <% Object.entries(statuses).forEach(function (s) { %><option value="<%= s[0] %>"<%= durum === s[0] ? ' selected' : '' %>><%= s[1] %></option><% }) %>
+        </select>
+      </label>
+      <label>Ara <input type="text" name="q" value="<%= q %>" placeholder="İsim, telefon ya da mesaj"></label>
+      <button class="btn btn-sm" type="submit">Filtrele</button>
+    </form>
+    <% if (!rows.length) { %>
+      <p>Bu filtreyle eşleşen talep yok.</p>
+    <% } else { %>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Tarih</th><th>Ad soyad</th><th>İletişim</th><th>Ders bilgisi</th><th>Mesaj</th><th>Durum</th><th><span class="sr">İşlem</span></th></tr></thead>
+          <tbody>
+          <% rows.forEach(function (r) { %>
+            <tr>
+              <td><%= fmtTime(r.created_at) %></td>
+              <td><strong><%= r.name %></strong></td>
+              <td><a href="tel:<%= r.phone.replace(/\s/g, '') %>"><%= r.phone %></a><% if (r.email) { %><br><a href="mailto:<%= r.email %>"><%= r.email %></a><% } %></td>
+              <td><%= r.grade %><br><span class="date"><%= r.mode %></span></td>
+              <td class="msg"><%= r.message %></td>
+              <td>
+                <form method="post" action="/admin/talepler/<%= r.id %>/durum">
+                  <input type="hidden" name="_csrf" value="<%= csrf %>">
+                  <select name="status" aria-label="Durum" onchange="this.form.submit()">
+                    <% Object.entries(statuses).forEach(function (s) { %><option value="<%= s[0] %>"<%= r.status === s[0] ? ' selected' : '' %>><%= s[1] %></option><% }) %>
+                  </select>
+                  <noscript><button class="btn btn-sm" type="submit">Kaydet</button></noscript>
+                </form>
+              </td>
+              <td>
+                <form method="post" action="/admin/talepler/<%= r.id %>/sil" onsubmit="return confirm('Bu talep silinsin mi?')">
+                  <input type="hidden" name="_csrf" value="<%= csrf %>">
+                  <button class="btn btn-sm btn-danger" type="submit">Sil</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </div>
+</section>
+<%- include('../partials/foot') %>
